@@ -23,13 +23,13 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _userTransactions = [
-    Transaction(
-        id: 't1', title: 'Scarpe nuove', amount: 55.99, date: DateTime.now()),
-    Transaction(
-        id: 't1',
-        title: 'Spesa settimanale',
-        amount: 93.78,
-        date: DateTime.now())
+    // Transaction(
+    //     id: 't1', title: 'Scarpe nuove', amount: 55.99, date: DateTime.now()),
+    // Transaction(
+    //     id: 't1',
+    //     title: 'Spesa settimanale',
+    //     amount: 93.78,
+    //     date: DateTime.now())
   ];
 
   void _addNewTransaction(String txTitle, double txAmount) {
@@ -50,9 +50,9 @@ class _MyHomePageState extends State<MyHomePage> {
         context: ctx,
         builder: (_) {
           return GestureDetector(
-            onTap: () {},
-            behavior: HitTestBehavior.opaque,
-            child: NewTransaction(_addNewTransaction));
+              onTap: () {},
+              behavior: HitTestBehavior.opaque,
+              child: NewTransaction(_addNewTransaction));
         });
   }
 
@@ -86,7 +86,7 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () {},
+        onPressed: () => _startAddNewTransaction(context),
       ),
     );
   }

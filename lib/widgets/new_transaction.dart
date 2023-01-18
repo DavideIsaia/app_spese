@@ -23,6 +23,8 @@ class _NewTransactionState extends State<NewTransaction> {
     }
 
     widget.addTx(enteredTitle, enteredAmount);
+    //per far chiudere da solo il foglio di input dopo che premiamo invio
+    Navigator.of(context).pop();
   }
 
   @override
