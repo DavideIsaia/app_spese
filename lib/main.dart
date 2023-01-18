@@ -1,4 +1,5 @@
 // ignore_for_file: prefer_const_constructors
+import 'package:app_spese/widgets/chart.dart';
 import 'package:flutter/material.dart';
 import 'package:app_spese/models/transaction.dart';
 import 'package:app_spese/widgets/new_transaction.dart';
@@ -31,6 +32,12 @@ class _MyHomePageState extends State<MyHomePage> {
     //     amount: 93.78,
     //     date: DateTime.now())
   ];
+
+  List<Transaction> get _recentTransactions {
+    return _userTransactions.where((element) {
+      return element.date.isAfter(DateTime.now().subtract(Duration(days: 7)));
+    }).toList();
+  }
 
   void _addNewTransaction(String txTitle, double txAmount) {
     final newTx = Transaction(
@@ -72,13 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
           // mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Container(
-              width: double.infinity,
-              child: Card(
-                child: Text('Grafico'),
-                elevation: 5,
-              ),
-            ),
+            Chart(_recentTransactions),
             TransactionList(_userTransactions),
           ],
         ),
