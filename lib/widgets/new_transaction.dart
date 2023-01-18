@@ -25,6 +25,7 @@ class NewTransaction extends StatelessWidget {
           TextField(
             decoration: InputDecoration(labelText: 'Prezzo'),
             controller: amountController,
+            keyboardType: TextInputType.numberWithOptions(decimal: true), // potrebbe funzionare anche solo scrivendo TextInputType.number ma meglio specificare per iOS
             // onChanged: (val) {
             //   amountInput = val;
             // },
