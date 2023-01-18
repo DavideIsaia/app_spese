@@ -1,11 +1,13 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:app_spese/models/transaction.dart';
+import 'package:app_spese/widgets/chart_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class Chart extends StatelessWidget {
   final List<Transaction> recentTransactions;
   Chart(this.recentTransactions);
+
   // i getter sono quelle proprietà che voglio calcolare dinamicamente
   List<Map<String, Object>> get groupedTransacionValues {
     return List.generate(7, (index) {
@@ -19,7 +21,16 @@ class Chart extends StatelessWidget {
         }
       }
       //aggiungo substring per avere solo la lettera iniziale del giorno
-      return {'day': DateFormat.E().format(weekDay).substring(0,1), 'amount': totalSum};
+      return {
+        'day': DateFormat.E().format(weekDay).substring(0, 1),
+        'amount': totalSum
+      };
+    });
+  }
+
+  double get totalSpending {
+    return groupedTransacionValues.fold(0, (previousValue, element) {
+      return previousValue + (element['amount'] as double);
     });
   }
 
@@ -30,7 +41,8 @@ class Chart extends StatelessWidget {
       margin: EdgeInsets.all(20),
       child: Row(
         children: groupedTransacionValues.map((data) {
-          return Text('${data['day']}: ${data['amount']}');
+          return ChartBar(data['day'] as String, data['amount'] as double,
+              (data['amount'] as double) / totalSpending);
         }).toList(),
       ),
     );
